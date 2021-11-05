@@ -1,6 +1,6 @@
 var LineNotify = require('../src/client');
 const mi_sequelize = require('../config/db.config');
-const ACCESS_TOKEN = "Zz82ic2KrfKSuJA0ktg3hFq26oBHIvJIwsXGV2ykfv6";
+const ACCESS_TOKEN = "0ZQapzO7kMLFkz82AIJonnaDyVzQVTQMFVOA4XWA28d";
 //mi 0ZQapzO7kMLFkz82AIJonnaDyVzQVTQMFVOA4XWA28d
 //test Zz82ic2KrfKSuJA0ktg3hFq26oBHIvJIwsXGV2ykfv6
 //production Dv0P2wueKjBI0uJNMtVgkS3ZJdrJARUbYJw3aa8D2YV
