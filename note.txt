@@ -5,6 +5,8 @@ SELECT
   files.attach_file,
   convert(varchar, files.created, 24) as create_time,
 	convert(VARCHAR,files.created,103) as create_date,
+CONVERT(VARCHAR(10), GETDATE()-20, 23) + ' '  + '16:01:00' as date_affter,
+CONVERT(VARCHAR(10), GETDATE(), 23) + ' '  + '16:00:00' as date_now,
   files.created,
   header.plan_id,
   header.machine_id,
@@ -17,7 +19,7 @@ SELECT
  FROM mi.dbo.timesheet_attach_files files
  LEFT JOIN mi.dbo.timesheet_header header ON header.header_id = files.header_id
  LEFT JOIN mi.dbo.machine_planning planning ON planning.id = header.plan_id
-WHERE convert(DATE, files.created, 20) >= CONVERT(VARCHAR(10), GETDATE()-19, 23) + ' '  + '16:01:00' AND convert(DATE, files.created, 20) <= CONVERT(VARCHAR(10), GETDATE()-18, 23) + ' '  + '16:00:00'
+WHERE convert(DATE, files.created, 20) >= CONVERT(VARCHAR(10), GETDATE()-20, 23) + ' '  + '16:01:00' AND convert(DATE, files.created, 20) <= CONVERT(VARCHAR(10), GETDATE()-19, 23) + ' '  + '16:00:00'
 
 
 
