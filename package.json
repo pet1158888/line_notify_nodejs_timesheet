@@ -3,11 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www"
+    "start": "node index.js",
+    "dev": "SET NODE_ENV=development& nodemon index.js",
+    "production": "SET NODE_ENV=production& pm2 start index.js --name timesheet_send_line"
   },
   "dependencies": {
     "axios": "^0.24.0",
+    "config": "^3.3.6",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",

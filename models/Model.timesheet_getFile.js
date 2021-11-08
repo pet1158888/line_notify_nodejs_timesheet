@@ -1,6 +1,6 @@
 var LineNotify = require('../src/client');
 const mi_sequelize = require('../config/db.config');
-const ACCESS_TOKEN = "Zz82ic2KrfKSuJA0ktg3hFq26oBHIvJIwsXGV2ykfv6";
+const ACCESS_TOKEN = "0ZQapzO7kMLFkz82AIJonnaDyVzQVTQMFVOA4XWA28d";
 //mi 0ZQapzO7kMLFkz82AIJonnaDyVzQVTQMFVOA4XWA28d
 //test Zz82ic2KrfKSuJA0ktg3hFq26oBHIvJIwsXGV2ykfv6
 //production Dv0P2wueKjBI0uJNMtVgkS3ZJdrJARUbYJw3aa8D2YV
@@ -59,7 +59,7 @@ Timesheet_getFile.FunctionGetData = (req, res, next) => {
    FROM mi.dbo.timesheet_attach_files files
    LEFT JOIN mi.dbo.timesheet_header header ON header.header_id = files.header_id
    LEFT JOIN mi.dbo.machine_planning planning ON planning.id = header.plan_id
-  --WHERE convert(DATE, files.created, 20) >= CONVERT(VARCHAR(10), GETDATE()-1, 23) + ' '  + '16:01:00' AND convert(DATE, files.created, 20) <= CONVERT(VARCHAR(10), GETDATE(), 23) + ' '  + '16:00:00'`;
+   WHERE convert(DATE, files.created, 20) >= CONVERT(VARCHAR(10), GETDATE()-1, 23) + ' '  + '16:01:00' AND convert(DATE, files.created, 20) <= CONVERT(VARCHAR(10), GETDATE(), 23) + ' '  + '16:00:00'`;
     mi_sequelize.query(sql).then((data) => {
         timesheet_data.push(...data[0])
         sendlineFN(res);

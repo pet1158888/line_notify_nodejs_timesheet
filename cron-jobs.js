@@ -1,6 +1,8 @@
 /** @format */
 const cron = require("node-cron");
 const config = require("./config");
+const configPORT = require('config')
+const PORT = configPORT.get('PORT');
 const {
   run_time_at_16_00
 } = config;
@@ -12,7 +14,7 @@ cron.schedule(run_time_at_16_00, () => {
     headers: {
       "content-type": "application/x-www-form-urlencoded",
     },
-    url: "http://localhost:5000/send",
+    url: `http://localhost:${PORT}/send`,
   };
   axios(header).then((res) => {
     console.log("run_time_at_16_00");
