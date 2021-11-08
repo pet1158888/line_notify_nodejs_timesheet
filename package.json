@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "SET NODE_ENV=development& nodemon index.js",
-    "production": "SET NODE_ENV=production& pm2 start index.js --name timesheet_send_line"
+    "production": "SET NODE_ENV=production& pm2 start index.js --name timesheet"
   },
   "dependencies": {
     "axios": "^0.24.0",
