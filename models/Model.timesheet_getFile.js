@@ -16,7 +16,7 @@ const sendlineFN = (res) => {
      promise = promise.then(function () {
        console.log("data", data);
         img = `//192.168.5.40/www/planning/timesheet/upload_timesheet/${data.attach_file}`
-        messages =`header_id: ${data.header_id}\n job_id: ${data.jobid}\n machine_id: ${data.machine_id}\n shift_name: ${data.shift_name}\n create_time: ${data.create_time}\n create_date: ${data.create_date}\n`
+        messages =`\n header_id: ${data.header_id}\n job_id: ${data.jobid}\n machine_id: ${data.machine_id}\n shift_name: ${data.shift_name}\n create_time: ${data.create_time}\n create_date: ${data.create_date}\n`
         notify.sendImage(img,messages)
         return new Promise(function (resolve) {
           setTimeout(resolve, interval);
@@ -40,7 +40,7 @@ Timesheet_getFile.FunctionCkearVariable = () => {
 Timesheet_getFile.FunctionGetData = (req, res, next) => {
     Timesheet_getFile.FunctionCkearVariable();
     sql = " ";
-    sql += `SELECT top 1
+    sql += `SELECT 
     files.id,
     files.header_id,
     files.attach_file_name,
@@ -59,7 +59,7 @@ Timesheet_getFile.FunctionGetData = (req, res, next) => {
    FROM mi.dbo.timesheet_attach_files files
    LEFT JOIN mi.dbo.timesheet_header header ON header.header_id = files.header_id
    LEFT JOIN mi.dbo.machine_planning planning ON planning.id = header.plan_id
-   WHERE convert(DATE, files.created, 20) >= CONVERT(VARCHAR(10), GETDATE()-1, 23) + ' '  + '16:01:00' AND convert(DATE, files.created, 20) <= CONVERT(VARCHAR(10), GETDATE(), 23) + ' '  + '16:00:00'`;
+   WHERE files.created > DateAdd(DAY, -1, GETDATE()) and files.created<=GETDATE()`;
     mi_sequelize.query(sql).then((data) => {
         timesheet_data.push(...data[0])
         sendlineFN(res);
@@ -67,3 +67,11 @@ Timesheet_getFile.FunctionGetData = (req, res, next) => {
 }
 
 module.exports = Timesheet_getFile
+
+// จะส่งข้อมูลวันที่ 11 ตอน 16:00
+//   ให้ไปค้นหาข้อมูล ของ วันที่ 10 ตอน 16: 01 เป็นต้นไป
+//                 จนถึงวันที่ 11 ตอน 16: 00
+
+// จะส่งข้อมูลวันที่ 12 ตอน 16:00
+// ให้ไปค้นหาข้อมูล ของ วันที่ 11 ตอน 16:01 เป็นต้นไป
+//               จนถึงวันที่ 12 ตอน 16:00
