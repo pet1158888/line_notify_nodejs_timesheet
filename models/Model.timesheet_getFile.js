@@ -1,10 +1,14 @@
 var LineNotify = require('../src/client');
 const mi_sequelize = require('../config/db.config');
-const ACCESS_TOKEN = "0ZQapzO7kMLFkz82AIJonnaDyVzQVTQMFVOA4XWA28d";
+const ACCESS_TOKEN = "0sHlHdNIkCtt5gZR2jNR3L6mFTWG19orYbFM7lXPBx1";
+const ACCESS_TOKEN2 = "0ZQapzO7kMLFkz82AIJonnaDyVzQVTQMFVOA4XWA28d";
 //mi 0ZQapzO7kMLFkz82AIJonnaDyVzQVTQMFVOA4XWA28d
 //test Zz82ic2KrfKSuJA0ktg3hFq26oBHIvJIwsXGV2ykfv6
+//bot2 vtnF8VVYTh0Tye8iSMcRZwDgXS4w19qxZ6uq6GSryzm
 //production Dv0P2wueKjBI0uJNMtVgkS3ZJdrJARUbYJw3aa8D2YV
+//production2 0sHlHdNIkCtt5gZR2jNR3L6mFTWG19orYbFM7lXPBx1
 const notify = new LineNotify(`${ACCESS_TOKEN}`);
+const notify2 = new LineNotify(`${ACCESS_TOKEN2}`);
 const Timesheet_getFile = (timesheet) => {
     [];
 }
@@ -17,7 +21,8 @@ const sendlineFN = (res) => {
        console.log("data", data);
         img = `//192.168.5.40/www/planning/timesheet/upload_timesheet/${data.attach_file}`
         messages =`\n header_id: ${data.header_id}\n job_id: ${data.jobid}\n machine_id: ${data.machine_id}\n shift_name: ${data.shift_name}\n create_time: ${data.create_time}\n create_date: ${data.create_date}\n`
-        notify.sendImage(img,messages)
+       notify.sendImage(img, messages)
+       notify2.sendImage(img, messages)
         return new Promise(function (resolve) {
           setTimeout(resolve, interval);
         });
