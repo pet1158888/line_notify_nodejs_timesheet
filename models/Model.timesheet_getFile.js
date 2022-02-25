@@ -20,7 +20,7 @@ const sendlineFN = (res) => {
      promise = promise.then(function () {
        console.log("data", data);
         img = `//192.168.5.40/www/planning/timesheet/upload_timesheet/${data.attach_file}`
-        messages =`\n header_id: ${data.header_id}\n job_id: ${data.jobid}\n machine_id: ${data.machine_id}\n shift_name: ${data.shift_name}\n create_time: ${data.create_time}\n create_date: ${data.create_date}\n`
+        messages =`\n header_id: ${data.header_id}\n job_id: ${data.jobid}\n machine_id: ${data.machine_id}\n machine_name: ${data.machine_name}\n shift_name: ${data.shift_name}\n create_time: ${data.create_time}\n create_date: ${data.create_date}\n`
        notify.sendImage(img, messages)
        notify2.sendImage(img, messages)
         return new Promise(function (resolve) {
@@ -55,6 +55,7 @@ Timesheet_getFile.FunctionGetData = (req, res, next) => {
     files.created,
     header.plan_id,
     header.machine_id,
+	  machine_tb.machine_name,
     planning.jobid,
     planning.shift_id, 
    CASE
@@ -64,6 +65,7 @@ Timesheet_getFile.FunctionGetData = (req, res, next) => {
    FROM mi.dbo.timesheet_attach_files files
    LEFT JOIN mi.dbo.timesheet_header header ON header.header_id = files.header_id
    LEFT JOIN mi.dbo.machine_planning planning ON planning.id = header.plan_id
+	 LEFT JOIN mi.dbo.machine machine_tb ON machine_tb.machine_id = header.machine_id
    WHERE files.created > DateAdd(DAY, -1, GETDATE()) and files.created<=GETDATE()`;
     mi_sequelize.query(sql).then((data) => {
         timesheet_data.push(...data[0])
