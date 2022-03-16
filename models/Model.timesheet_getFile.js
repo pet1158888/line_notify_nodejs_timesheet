@@ -51,7 +51,7 @@ Timesheet_getFile.FunctionCkearVariable = () => {
 Timesheet_getFile.FunctionGetData = (req, res, next) => {
     Timesheet_getFile.FunctionCkearVariable();
     sql = " ";
-    sql += `SELECT TOP 1
+    sql += `SELECT
     files.id,
     files.header_id,
     files.attach_file_name,
